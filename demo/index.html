@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example host page for UrlShortener widget</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: green;
+            display: flex;
+        }
+
+        header > h2 {
+            margin: 0;
+            line-height: 30px;
+            padding: 10px;
+            vertical-align: middle;
+            color: #eee;
+        }
+
+        nav > ul {
+            margin: 0;
+            list-style: none;
+            display: flex;
+            padding: 15px;
+        }
+
+        nav > ul > li {
+            margin: 0 20px;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        nav > ul > li:hover {
+            color: #ccc;
+        }
+
+        main {
+            padding: 50px 30px;
+        }
+    </style>
+
+    <script src="http://localhost:8080/url-shortener.widget.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h2>UrlShortener Demo</h2>
+        <nav>
+            <ul>
+                <li>First item</li>
+                <li>Second item</li>
+                <li>Third item</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Third party demo website with UrlShortener embedded</h1>
+        <p>Click the button at the bottom of the page to open UrlShortener</p>
+    </main>
+</body>
+
+</html>

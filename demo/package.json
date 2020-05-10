@@ -1,0 +1,11 @@
+{
+  "name": "demo-url-shortener",
+  "version": "1.0.0",
+  "description": "Third party demo website for UrlShortener",
+  "scripts": {
+    "server": "http-server -p 9000 -o http://localhost:9000/index.html"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
