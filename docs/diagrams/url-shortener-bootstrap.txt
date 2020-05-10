@@ -1,0 +1,35 @@
+title UrlShortener bootstrap overview
+
+
+entryspacing 1.1
+
+participantgroup #lightgreen **Client**
+participant Browser
+participant Third party website
+participant UrlShortener Widget IFrame
+end
+
+participant Third party server
+
+participantgroup #lightblue **UrlShortener Server**
+participant UrlShortener server
+end
+
+Browser -> Third party server:Open www.third-party-site.com
+Third party website <-- Third party server: GET /index.html
+
+box over Third party website:Third party website  HTML should include UrlShortener widget bootstrap script:\n\n<html>\n    <head>\n        <script src="{{UrlShortenerDomain}}/static/url-shortener.widget.js"> </script>\n    </head>\n</html>
+
+Third party website -> UrlShortener server: GET /static/url-shortener.widget.js
+Third party website <-- UrlShortener server: GET /static/url-shortener.widget.js
+
+box over Third party website: UrlShortener bootstrap script appends iFrame with widget:\n\n<iframe src="{{UrlShortenerDomain}}></iframe>
+
+Third party website ->UrlShortener Widget IFrame: append iFrame
+UrlShortener Widget IFrame -> UrlShortener server: GET /index.html
+UrlShortener Widget IFrame <--UrlShortener server: GET /index.html
+UrlShortener Widget IFrame -> UrlShortener server: GET /static/app.js
+UrlShortener Widget IFrame <--UrlShortener server: GET /static/app.js
+
+
+box over UrlShortener Widget IFrame: UrlShortener React App boostrap
