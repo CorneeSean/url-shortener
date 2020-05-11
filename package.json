@@ -1,0 +1,14 @@
+{
+  "name": "url-shortener-frontend",
+  "version": "1.0.0",
+  "description": "Url Shortener",
+  "scripts": {
+    "server:app": "cd ./frontend && http-server",
+    "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
+    "start": "concurrently \"npm run server:app\" \"npm run server:demo\""
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "concurrently": "^5.1.0"
+  }
+}
