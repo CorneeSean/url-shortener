@@ -41,7 +41,7 @@
     function appendWidgetFrame() {
         const frame = document.createElement( 'iframe' );
         frame.id = WIDGET_ID;
-        frame.src = WIDGET_ORIGIN + '/index.html';
+        frame.src = WIDGET_ORIGIN;
         frame.classList.add(WIDGET_TOGGLE_CLASS);
         document.body.appendChild( frame );
     }
