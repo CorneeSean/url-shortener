@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Url Shortener",
   "scripts": {
-    "server:app": "cd ./server && node ./server.js",
+    "frontend:build": "node ./frontend/build/copy.js",
+    "server:app": "node ./server/server.js",
     "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
-    "start": "concurrently \"npm run server:app\" \"npm run server:demo\""
+    "start": "concurrently \"npm run frontend:build && npm run server:app\" \"npm run server:demo\""
   },
   "devDependencies": {
     "http-server": "^0.11.1",
