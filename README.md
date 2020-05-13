@@ -38,9 +38,9 @@ Any client website willing to use the widget, should include the following scrip
 This will load the widget bootstrap script that appends the widget iframe to the host page.
 
 Please take a look at bootstrap sequence diagram below for more detailed process description:
-![UrlShortener boostrap diagram](/docs/diagrams/url-shortener-bootstrap.png)
+![UrlShortener boostrap diagram](./docs/diagrams/url-shortener-bootstrap.png)
 
 ### Widget client-server architecture overview
 
-![Client Server diagram](/docs/diagrams/client-server-communication.png)
+![Client Server diagram](./docs/diagrams/client-server-communication.png)
 
