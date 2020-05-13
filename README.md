@@ -9,7 +9,7 @@ The repo contains:
  * demo website connecting the two parts above, located in `/demo` directory
  
  Checklist - features to complete:
- 1. Documentation
+ 1. ~~Documentation~~
  1. ~~Widget iFrame bootstrap script~~ 
  1. ~~Demo page~~ 
  1. ~~UrlShortener server~~
@@ -41,4 +41,6 @@ Please take a look at bootstrap sequence diagram below for more detailed process
 ![UrlShortener boostrap diagram](/docs/diagrams/url-shortener-bootstrap.png)
 
 ### Widget client-server architecture overview
-// TODO
+
+![Client Server diagram](/docs/diagrams/client-server-communication.png)
+

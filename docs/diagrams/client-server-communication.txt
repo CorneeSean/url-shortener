@@ -1,0 +1,46 @@
+title UrlShortener Client-Server communication
+
+
+entryspacing 1.1
+
+actor User
+
+participantgroup #lightgreen **Client**
+participant Browser
+participant UrlShortener Widget IFrame
+end
+
+
+participantgroup #lightblue **UrlShortener Server**
+participant UrlShortener server
+participant KeyValueFile storage
+end
+
+User -> Browser: pastes to address bar:\n{{UrlShortenerDomain}}/{{UrlHash}}
+Browser -> UrlShortener server
+
+Browser -> UrlShortener server: GET /{{urlHash}}
+UrlShortener server ->KeyValueFile storage: storage.get(urlHash)
+UrlShortener server <-- KeyValueFile storage: returns website url
+UrlShortener server --> Browser: HTTP 301 redirects to website url
+
+box over Browser: opens website by url from redirect
+
+UrlShortener Widget IFrame -> UrlShortener server: GET /index.html   GET /static/*\*
+
+box over UrlShortener Widget IFrame: Download index.html and static assets
+
+UrlShortener Widget IFrame <--UrlShortener server: HTTP 200 OK
+
+box over UrlShortener Widget IFrame: Boostrap React App
+
+box over UrlShortener Widget IFrame: Show UrlShortener form
+User -> UrlShortener Widget IFrame: fills the UrlShortener form with desired url\n clicks the button
+UrlShortener Widget IFrame -> UrlShortener server: POST /shorten BODY: {url}
+box over UrlShortener server: urlHash = hash(url)
+
+UrlShortener server -> KeyValueFile storage: store.add(urlHash, url)
+
+UrlShortener server --> UrlShortener Widget IFrame: HTTP 200 OK DATA: {shortUrl}
+
+box over UrlShortener Widget IFrame: Show short url link
