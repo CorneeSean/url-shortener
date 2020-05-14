@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "Url Shortener",
   "scripts": {
-    "build-prod": "parcel build frontend/src/index.html",
-    "clean": "rm dist/bundle.js",
-    "frontend:build": "node ./frontend/build/copy.js",
+    "frontend:parcel": "parcel frontend/src/index.html -d frontend/dist-dev",
+    "frontend:parcel:build": "parcel build frontend/src/index.html -d server/public --public-url ./public/",
+    "frontend:dev": "cd ./frontend && http-server -p 1337 -o http://localhost:1337/index.dev.html",
+    "frontend:build": "node ./frontend/build/clean.js && npm run frontend:parcel:build && node ./frontend/build/copy.js",
     "server:app": "node ./server/server.js",
     "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
-    "server:dev": "cd ./frontend && http-server -p 1337 -o http://localhost:1337/index.dev.html",
     "start": "concurrently \"npm run frontend:build && npm run server:app\" \"npm run server:demo\"",
-    "start:dev": "concurrently  \"npm run server:dev\" \"parcel frontend/src/index.html\""
+    "start:dev": "concurrently  \"npm run frontend:dev\" \"npm run frontend:parcel\" \"npm run server:app\""
   },
   "dependencies": {
     "express": "^4.17.1",
