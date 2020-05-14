@@ -3,16 +3,27 @@
   "version": "1.0.0",
   "description": "Url Shortener",
   "scripts": {
+    "build-prod": "parcel build frontend/src/index.html",
+    "clean": "rm dist/bundle.js",
     "frontend:build": "node ./frontend/build/copy.js",
     "server:app": "node ./server/server.js",
     "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
-    "start": "concurrently \"npm run frontend:build && npm run server:app\" \"npm run server:demo\""
-  },
-  "devDependencies": {
-    "http-server": "^0.11.1",
-    "concurrently": "^5.1.0"
+    "server:dev": "cd ./frontend && http-server -p 1337 -o http://localhost:1337/index.dev.html",
+    "start": "concurrently \"npm run frontend:build && npm run server:app\" \"npm run server:demo\"",
+    "start:dev": "concurrently  \"npm run server:dev\" \"parcel frontend/src/index.html\""
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "concurrently": "^5.1.0",
+    "http-server": "^0.11.1",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.5",
+    "typescript": "^3.9.2"
   }
 }
