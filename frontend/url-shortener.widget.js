@@ -1,5 +1,5 @@
-(function() {
-    const WIDGET_ORIGIN = 'http://localhost:8080';
+(function(widgetOrigin) {
+    const WIDGET_ORIGIN = widgetOrigin || 'http://localhost:8080';
     const WIDGET_ID = 'url-shortener-widget';
     const WIDGET_TOGGLE_MESSAGE = 'url-shortener:toggle';
     const WIDGET_TOGGLE_CLASS = 'collapsed';
@@ -18,7 +18,7 @@
             }
 
             #${WIDGET_ID}.${WIDGET_TOGGLE_CLASS} {
-                height: 45px;
+                height: 50px;
                 width: 130px;
             }
         `;
@@ -49,4 +49,4 @@
     window.addEventListener('message', toggleWidget);
     addStylesToHeader(WIDGET_IFRAME_STYLES);
     appendWidgetFrame();
-})();
+})(window.urlShortenerOrigin);
