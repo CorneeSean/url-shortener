@@ -1,6 +1,6 @@
-@import '../../styles/variables';
+@import 'frontend/src/styles/variables';
 
-.url-shortener__toggle-button {
+.widget__toggle-button {
   &.close {
     $size: 25px;
     $position-offset: 5px;
