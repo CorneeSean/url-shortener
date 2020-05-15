@@ -1,41 +1,44 @@
 import * as React from 'react';
 import { createRef, useContext } from 'react';
 import { ConfigContext } from "../../config";
+
 import './widget-toggle-button.scss';
 
 interface WidgetToggleButtonProps {
-    widgetExpanded: boolean;
-    toggleWidgetExpanded: () => void;
+    expanded: boolean;
+    toggleExpanded: () => void;
+    buttonText: string;
 }
 
 const BUTTON_CLASSES = {
-    open: 'url-shortener__button url-shortener__toggle-button fadeIn open',
-    close: 'url-shortener__toggle-button fadeIn close',
+    open: 'widget__button widget__toggle-button fadeIn open',
+    close: 'widget__toggle-button fadeIn close',
 };
 
 export const WidgetToggleButton: React.FC<WidgetToggleButtonProps> = ({
-      widgetExpanded, toggleWidgetExpanded
+  expanded, toggleExpanded, buttonText
 }) => {
     const config = useContext(ConfigContext);
     const buttonRef = createRef<HTMLButtonElement>();
+    const {parentWindow, appRoot} = config.globals;
 
     const toggleWidget = () => {
-        toggleWidgetExpanded();
-        config.globals.parentWindow.postMessage(config.toggleWidgetMessage, '*');
-        config.globals.appRoot.classList.toggle('widget-opened');
+        toggleExpanded();
+        parentWindow.postMessage(config.toggleWidgetMessage, '*');
+        appRoot.classList.toggle('widget-opened');
+        buttonRef.current!.blur();
     };
     const makeVisible = () => {
         buttonRef.current!.classList.remove('fadeIn');
     };
 
     return (
-        <button className={widgetExpanded ? BUTTON_CLASSES.close : BUTTON_CLASSES.open}
+        <button className={expanded ? BUTTON_CLASSES.close : BUTTON_CLASSES.open}
                 ref={buttonRef}
                 onClick={toggleWidget}
                 onAnimationEnd={makeVisible}
         >
-            {widgetExpanded ? '\u00D7' : 'UrlShortener'}
+            {expanded ? '\u00D7' : buttonText}
         </button>
-    );
+    )
 };
-
