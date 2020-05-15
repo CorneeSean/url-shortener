@@ -1,17 +1,23 @@
-export type UrlShortenerConfig = {
-    toggleWidgetMessage: string;
-}
+import { createContext } from 'react';
 
-export const config: UrlShortenerConfig = {
-    toggleWidgetMessage: 'url-shortener:toggle',
-};
-
-export type AppGlobals = {
+type AppGlobals = {
     parentWindow: Window,
     appRoot: HTMLElement,
 }
 
-export const globals: AppGlobals = {
+const globals: AppGlobals = {
     parentWindow: window.parent,
     appRoot: document.getElementById('app-root')!,
 };
+
+export type UrlShortenerConfig = {
+    toggleWidgetMessage: string;
+    globals: AppGlobals,
+}
+
+export const config: UrlShortenerConfig = {
+    toggleWidgetMessage: 'url-shortener:toggle',
+    globals,
+};
+
+export const ConfigContext = createContext(config);
