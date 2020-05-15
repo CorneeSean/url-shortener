@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+
+.url-shortener__form {
+  display: flex;
+}
+
+.url-shortener__input {
+  height: 40px;
+  margin: 0;
+  border-radius: $widget-border-radius 0 0 $widget-border-radius;
+  padding: 10px;
+  border: 1px solid silver;
+  width: 250px;
+}
