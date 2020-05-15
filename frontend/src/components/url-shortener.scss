@@ -1,0 +1,24 @@
+@import "frontend/src/styles/variables";
+
+#app-root {
+  height: 100%;
+  transition: box-shadow 0.5s ease;
+  overflow: hidden;
+
+  &.widget-opened {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: $widget-border-radius $widget-border-radius 0 0;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+  }
+}
+
+#app-root > h2 {
+  margin: 5px;
+}
+
+.url-shortener__form-container {
+  text-align: center;
+}

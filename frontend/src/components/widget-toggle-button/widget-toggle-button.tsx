@@ -8,6 +8,11 @@ interface WidgetToggleButtonProps {
     toggleWidgetExpanded: () => void;
 }
 
+const BUTTON_CLASSES = {
+    open: 'url-shortener__button url-shortener__toggle-button fadeIn open',
+    close: 'url-shortener__toggle-button fadeIn close',
+};
+
 export const WidgetToggleButton: React.FC<WidgetToggleButtonProps> = ({
       widgetExpanded, toggleWidgetExpanded
 }) => {
@@ -24,7 +29,7 @@ export const WidgetToggleButton: React.FC<WidgetToggleButtonProps> = ({
     };
 
     return (
-        <button className={`url-shortener__toggle-button ${widgetExpanded ? 'fadeIn close' : 'fadeIn open'}`}
+        <button className={widgetExpanded ? BUTTON_CLASSES.close : BUTTON_CLASSES.open}
                 ref={buttonRef}
                 onClick={toggleWidget}
                 onAnimationEnd={makeVisible}

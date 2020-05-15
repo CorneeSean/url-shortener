@@ -10,18 +10,31 @@ html {
 
 $shadow-padding: 5px;
 body {
+  font-family: sans-serif;
   height: 100%;
   margin: 0;
   padding: $shadow-padding $shadow-padding 0 $shadow-padding;
 }
 
-#app-root {
-  height: 100%;
-  transition: box-shadow 0.5s ease;
+.url-shortener__button {
+  color: white;
+  background: dodgerblue;
+  border: 0;
+  border-radius: $widget-border-radius;
+  max-width: 120px;
+  padding: 12px;
+  font-size: 16px;
+  height: 40px;
+  cursor: pointer;
 
-  &.widget-opened {
-    border-radius: $widget-border-radius $widget-border-radius 0 0;
-    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+  &[disabled] {
+    opacity: 0.9;
+    background: silver;
+    cursor: not-allowed;
+  }
+
+  &.stick-left {
+    border-radius: 0 $widget-border-radius $widget-border-radius 0;
   }
 }
 

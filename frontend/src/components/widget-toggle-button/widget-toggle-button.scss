@@ -13,6 +13,7 @@
     font-size: 20px;
     line-height: $size;
     font-weight: 500;
+    cursor: pointer;
 
     position: absolute;
     right: $position-offset;
@@ -20,12 +21,7 @@
   }
 
   &.open {
-    color: white;
-    background: dodgerblue;
-    border: 0;
     border-radius: $widget-border-radius $widget-border-radius 0 0;
-    max-width: 120px;
-    padding: 12px;
-    font-size: 16px;
+    height: 45px;
   }
 }
