@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -13,24 +15,27 @@ body {
   padding: $shadow-padding $shadow-padding 0 $shadow-padding;
 }
 
-$border-radius: 3px;
 #app-root {
   height: 100%;
   transition: box-shadow 0.5s ease;
 
   &.widget-opened {
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: $widget-border-radius $widget-border-radius 0 0;
     box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
   }
 }
 
+.fadeIn, {
+  opacity: 0;
+  animation: .3s ease-in-out fadeIn;
+  animation-delay: .2s;
+}
 
-.url-shortener-toggle-button {
-  color: white;
-  background: dodgerblue;
-  border: 0;
-  border-radius: $border-radius $border-radius 0 0;
-  max-width: 120px;
-  padding: 12px;
-  font-size: 16px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

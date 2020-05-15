@@ -1,23 +1,33 @@
 import * as React from 'react';
+import { WidgetToggleButton } from "./components/widget-toggle-button/widget-toggle-button";
 import { ConfigContext } from "./config";
 
-class UrlShortener extends React.Component {
+type UrlShortenerState = {
+    widgetExpanded: boolean
+}
+
+class UrlShortener extends React.Component<{}, UrlShortenerState> {
     static contextType = ConfigContext;
     context!: React.ContextType<typeof ConfigContext>;
 
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            widgetExpanded: false
+        };
+    }
+
     render() {
+        const {widgetExpanded} = this.state;
         return (
-            <button className='url-shortener-toggle-button'
-                    onClick={() => this.toggleWidget()}>
-                UrlShortener
-            </button>
+            <WidgetToggleButton widgetExpanded={widgetExpanded}
+                                toggleWidgetExpanded={() => this.toggleWidgetExpanded()}>
+            </WidgetToggleButton>
         );
     }
 
-    private toggleWidget() {
-        const config = this.context;
-        config.globals.parentWindow.postMessage(config.toggleWidgetMessage, '*');
-        config.globals.appRoot.classList.toggle('widget-opened');
+    private toggleWidgetExpanded() {
+        this.setState({widgetExpanded: !this.state.widgetExpanded})
     }
 }
 

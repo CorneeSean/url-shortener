@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+
+.url-shortener__toggle-button {
+  &.close {
+    $size: 25px;
+    $position-offset: 5px;
+
+    background: transparent;
+    border-radius: 50%;
+    border: 0;
+    width: $size;
+    height: $size;
+    font-size: 20px;
+    line-height: $size;
+    font-weight: 500;
+
+    position: absolute;
+    right: $position-offset;
+    top: $position-offset;
+  }
+
+  &.open {
+    color: white;
+    background: dodgerblue;
+    border: 0;
+    border-radius: $widget-border-radius $widget-border-radius 0 0;
+    max-width: 120px;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
