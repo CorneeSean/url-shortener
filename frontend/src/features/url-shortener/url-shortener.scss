@@ -1,3 +1,6 @@
-.url-shortener__form-container {
+.url-shortener__container {
   text-align: center;
+  & > h2 {
+    margin: 5px;
+  }
 }

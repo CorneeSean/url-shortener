@@ -7,7 +7,7 @@ import UrlUtils from "../../../../../common/utils/url-utils";
 
 import './url-shortener-form.scss';
 
-type UrlShortenerFormValue = {
+export type UrlShortenerFormValue = {
     url: string | null
 }
 
@@ -31,24 +31,21 @@ export const UrlShortenerForm: React.FC<UrlShortenerFormProps> = ({onSubmit, sub
     const urlValueChange = (val: string) => setFormValue({url: val});
 
     return (
-        <>
-            <p>Please paste your url below</p>
-            <form className='url-shortener__form' onSubmit={submitForm}>
-                <TextInput
-                    placeholder={'Url to be shortened'}
-                    required={true}
-                    validators={[urlValidator]}
-                    validityChange={urlInputValidityChange}
-                    valueChange={urlValueChange}
-                    stick={"right"}
-                />
+        <form className='url-shortener__form' onSubmit={submitForm}>
+            <TextInput
+                placeholder={'Url to be shortened'}
+                required={true}
+                validators={[urlValidator]}
+                validityChange={urlInputValidityChange}
+                valueChange={urlValueChange}
+                stick={"right"}
+            />
 
-                <button className="widget__button stick-left"
-                        type='submit'
-                        disabled={!isFormValid() || submitInProgress}>
-                    Shorten
-                </button>
-            </form>
-        </>
+            <button className="widget__button stick-left"
+                    type='submit'
+                    disabled={!isFormValid() || submitInProgress}>
+                Shorten
+            </button>
+        </form>
     );
 };
