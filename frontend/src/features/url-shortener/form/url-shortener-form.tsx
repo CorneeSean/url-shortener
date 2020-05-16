@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SyntheticEvent, useState } from 'react';
 
-import { TextInput } from "../../input/text-input";
+import { TextInput } from "../../../components/input/text-input";
 
 import UrlUtils from "../../../../../common/utils/url-utils";
 
