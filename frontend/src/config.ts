@@ -10,14 +10,18 @@ const globals: AppGlobals = {
     appRoot: document.getElementById('app-root')!,
 };
 
-export type UrlShortenerConfig = {
-    toggleWidgetMessage: string;
+export type WidgetConfig = {
+    toggleWidgetMessage: string,
     globals: AppGlobals,
+    hosts: {[key: string]: string},
 }
 
-export const config: UrlShortenerConfig = {
+export const config: WidgetConfig = {
     toggleWidgetMessage: 'url-shortener:toggle',
     globals,
+    hosts: {
+        urlShortener: "http://localhost:8080",
+    }
 };
 
 export const ConfigContext = createContext(config);
