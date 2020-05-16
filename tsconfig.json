@@ -10,6 +10,8 @@
         "target": "es5",
         "allowJs": true,
         "jsx": "react",
+        "lib": ["ES2020", "DOM"],
+        "esModuleInterop": true
     },
     "include": [
         "./src/**/*"
