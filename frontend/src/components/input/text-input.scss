@@ -1,0 +1,26 @@
+@import "frontend/src/styles/variables";
+
+.url-shortener__input-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.url-shortener__input {
+  height: 40px;
+  margin: 0;
+  border-radius: $widget-border-radius;
+  padding: 10px;
+  border: 1px solid silver;
+  width: 250px;
+
+  &.stick-right {
+    border-radius: $widget-border-radius 0 0 $widget-border-radius;
+  }
+}
+
+.url-shortener__input-error {
+  font-size: .8em;
+  margin: .3em .5em;
+  color: #d41b1b;
+}
