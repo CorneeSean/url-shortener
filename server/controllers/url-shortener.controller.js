@@ -23,7 +23,14 @@ function redirectByUrlHash( { storage } ) {
  * @return {function(...[*]=)}
  */
 function shortenUrl( { config, storage } ) {
-    const generateRandomHash = () => (Math.random() * 100000).toString().slice( 0, 5 );
+    /** Pseudo-random hash generator taken from:
+     * @link {https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript#comment39476298_1349404}
+     */
+    const generateRandomHash = () =>
+        Math.random()
+            .toString(36)
+            .replace(/[^a-z]+/g, '')
+            .substr(0, 5);
 
     return ( req, res ) => {
         console.log( `POST ${ req.path }` );
