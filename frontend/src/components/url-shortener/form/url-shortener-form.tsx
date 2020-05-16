@@ -1,42 +1,51 @@
 import * as React from 'react';
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from 'react';
+
+import { TextInput } from "../../input/text-input";
+
+import UrlUtils from "../../../../../common/utils/url-utils";
 
 import './url-shortener-form.scss';
 
-type ShortenerFormProps = {
-    onSubmit: () => void;
+type UrlShortenerFormValue = {
+    url: string | null
+}
+
+type UrlShortenerFormProps = {
+    onSubmit: (formValue: UrlShortenerFormValue) => void;
     submitInProgress: boolean,
 }
 
-export const UrlShortenerForm: React.FC<ShortenerFormProps> = ({onSubmit, submitInProgress}) => {
-    const [isInputValid, setInputValid] = useState(false);
+export const UrlShortenerForm: React.FC<UrlShortenerFormProps> = ({onSubmit, submitInProgress}) => {
+    const [formValue, setFormValue] = useState<UrlShortenerFormValue>({url: null});
+    const [inputsValidity, setFormValidity] = useState({url: false});
 
-    const validateUrl = (ev: SyntheticEvent<HTMLInputElement>) => {
-        const inputValue = ev.currentTarget.value;
-        if (inputValue) {
-            setInputValid(true);
-        } else {
-            setInputValid(false);
-        }
-    };
     const submitForm = (ev: SyntheticEvent) => {
         ev.preventDefault();
-        onSubmit();
+        onSubmit(formValue);
     };
+    const isFormValid = () => !Object.values(inputsValidity).includes(false);
+
+    const urlInputValidityChange = (isValid: boolean) => setFormValidity({url: isValid});
+    const urlValidator = (val: string) => UrlUtils.isValidURL(val) ? null : 'Url is invalid';
+    const urlValueChange = (val: string) => setFormValue({url: val});
 
     return (
         <>
             <p>Please paste your url below</p>
             <form className='url-shortener__form' onSubmit={submitForm}>
-                {/*TODO: Move input to a separate, reusable component in the future */}
-                <input className="url-shortener__input"
-                       type='text'
-                       placeholder='Url to be shortened'
-                       onChange={validateUrl}
+                <TextInput
+                    placeholder={'Url to be shortened'}
+                    required={true}
+                    validators={[urlValidator]}
+                    validityChange={urlInputValidityChange}
+                    valueChange={urlValueChange}
+                    stick={"right"}
                 />
+
                 <button className="widget__button stick-left"
                         type='submit'
-                        disabled={!isInputValid || submitInProgress}>
+                        disabled={!isFormValid() || submitInProgress}>
                     Shorten
                 </button>
             </form>
