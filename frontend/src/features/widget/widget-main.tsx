@@ -24,6 +24,11 @@ export class WidgetMain extends React.Component<WidgetProps, WidgetState> {
         };
     }
 
+    componentDidMount(): void {
+        const {appRoot} = this.context.globals;
+        appRoot.classList.remove('loading');
+    }
+
     render() {
         const {expanded} = this.state;
         const {children: widgetContent, buttonText = "Open widget"} = this.props;
