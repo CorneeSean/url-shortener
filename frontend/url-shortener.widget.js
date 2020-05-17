@@ -19,7 +19,7 @@
 
             #${WIDGET_ID}.${WIDGET_TOGGLE_CLASS} {
                 height: 50px;
-                width: 130px;
+                width: 150px;
             }
         `;
 

@@ -23,5 +23,6 @@
   &.open {
     border-radius: $widget-border-radius $widget-border-radius 0 0;
     height: 45px;
+    line-height: 45px;
   }
 }
