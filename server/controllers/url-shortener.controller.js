@@ -10,9 +10,13 @@ function redirectByUrlHash( { storage } ) {
         console.log( `GET ${ req.path }` );
 
         const redirectUrl = storage.get( req.params[ 'urlHash' ] );
-        return redirectUrl ?
-            res.redirect( 301, UrlUtils.addProtocol( redirectUrl ) ) :
-            res.status( 404 ).send( 'Oops! 404! Your url was to hot to handle!' );
+        if ( redirectUrl ) {
+            console.log( 'LOG:', 'Redirect to ' + redirectUrl );
+            return res.redirect( 301, redirectUrl );
+        } else {
+            console.log( 'LOG:', '404 ' + req.path + ' not found' );
+            res.status( 404 ).send( 'Oops! 404! Your url was to hot to handle!' )
+        }
     }
 }
 
@@ -28,9 +32,9 @@ function shortenUrl( { config, storage } ) {
      */
     const generateRandomHash = () =>
         Math.random()
-            .toString(36)
-            .replace(/[^a-z]+/g, '')
-            .substr(0, 5);
+            .toString( 36 )
+            .replace( /[^a-z]+/g, '' )
+            .substr( 0, 5 );
 
     return ( req, res ) => {
         console.log( `POST ${ req.path }` );
