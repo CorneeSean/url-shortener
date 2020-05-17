@@ -3,7 +3,7 @@ import { config } from "./config";
 
 type WidgetMessagesFactory = { [key: string]: MessageCreator };
 
-type WidgetMessage = {
+export type WidgetMessage = {
     message: string,
     payload: any,
 }

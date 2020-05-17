@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "Url Shortener",
   "scripts": {
-    "frontend:parcel": "parcel frontend/src/index.html -d frontend/dist-dev",
-    "frontend:parcel:build": "parcel build frontend/src/index.html -d server/public --public-url ./public/",
-    "frontend:dev": "cd ./frontend && http-server -p 1337 -o http://localhost:1337/index.dev.html",
-    "frontend:build": "node ./frontend/build/clean.js && npm run frontend:parcel:build && node ./frontend/build/copy.js",
+    "frontend:react": "parcel frontend/src/index.html -d frontend/dist-dev",
+    "frontend:react:build": "parcel build frontend/src/index.html -d server/public --public-url ./public/",
+    "frontend:widget": "parcel frontend/index.dev.html -p 1337 -d frontend/dist-dev",
+    "frontend:widget:build": "parcel build frontend/url-shortener.widget.ts -d server/public",
+    "frontend:parcel:build": "npm run frontend:widget:build && npm run frontend:react:build",
+    "frontend:dev": "concurrently \"npm run frontend:widget\" \"npm run frontend:react\"",
+    "frontend:build": "node ./frontend/build/clean.js && npm run frontend:parcel:build",
     "server:app": "node ./server/server.js",
     "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
     "start": "npm run frontend:build && concurrently \"npm run server:app\" \"npm run server:demo\"",
-    "start:dev": "concurrently  \"npm run frontend:dev\" \"npm run frontend:parcel\" \"npm run server:app\""
+    "start:dev": "concurrently \"npm run frontend:dev\" \"npm run server:app\""
   },
   "dependencies": {
     "cors": "^2.8.5",
