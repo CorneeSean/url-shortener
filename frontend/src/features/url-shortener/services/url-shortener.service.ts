@@ -1,4 +1,4 @@
-import {config} from "../../../config";
+import {config} from "../../../contexts/config";
 import { UrlShortenerFormValue } from "../form/url-shortener-form";
 
 export class UrlShortenerService {

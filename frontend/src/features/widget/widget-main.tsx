@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ConfigContext } from "../../config";
+import { ConfigContext } from "../../contexts/config";
 
 import { WidgetToggleButton } from "./widget-toggle-button";
 

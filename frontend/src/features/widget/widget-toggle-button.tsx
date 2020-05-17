@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { createRef, useContext } from 'react';
-import { ConfigContext } from "../../config";
+
+import { ConfigContext } from "../../contexts/config";
+import { WidgetMessagingContext } from "../../contexts/widget-messaging";
 
 import './widget-toggle-button.scss';
 
@@ -18,13 +20,14 @@ const BUTTON_CLASSES = {
 export const WidgetToggleButton: React.FC<WidgetToggleButtonProps> = ({
   expanded, toggleExpanded, buttonText
 }) => {
+    const widgetMessages = useContext(WidgetMessagingContext);
     const config = useContext(ConfigContext);
     const buttonRef = createRef<HTMLButtonElement>();
-    const {parentWindow, appRoot} = config.globals;
+    const {appRoot} = config.globals;
 
     const toggleWidget = () => {
         toggleExpanded();
-        parentWindow.postMessage(config.toggleWidgetMessage, '*');
+        widgetMessages.toggle();
         appRoot.classList.toggle('widget-opened');
         buttonRef.current!.blur();
     };
