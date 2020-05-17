@@ -25,25 +25,21 @@ export const UrlShortener: React.FC<UrlShortenerProps> = ({service}) => {
             }
             {shortUrl && <ShortLink shortUrl={shortUrl} onBackClick={() => setShortUrl(null)}/>}
             {submitInProgress && <span className='url-shortener__progress-message'>Looking for scissors...</span>}
-            {submitError &&
-                <span className='url-shortener__progress-message error'>
-                    Oops! Something went wrong! Please try again later!
-                </span>
-            }
+            {submitError && <span className='url-shortener__progress-message error'>{submitError}</span>}
         </section>
     );
 };
 
 function useService(service: UrlShortenerService, setShortUrl: (url: string | null) => void):
-    [boolean, boolean, (formValue: UrlShortenerFormValue) => void] {
+    [boolean, string | null, (formValue: UrlShortenerFormValue) => void] {
     const [submitInProgress, setSubmitInProgress] = useState(false);
-    const [submitError, setSubmitError] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const onSubmit = (formValue: UrlShortenerFormValue) => {
         Promise.resolve()
             .then(() => {
                 setShortUrl(null);
-                setSubmitError(false);
+                setSubmitError(null);
                 setSubmitInProgress(true);
             })
             .then(() => service.shorten(formValue))
@@ -54,7 +50,7 @@ function useService(service: UrlShortenerService, setShortUrl: (url: string | nu
             .catch((err) => {
                 console.error(err);
                 setSubmitInProgress(false);
-                setSubmitError(true)
+                setSubmitError(err.message || err)
             });
     };
     return [submitInProgress, submitError, onSubmit];

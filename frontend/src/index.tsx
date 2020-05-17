@@ -9,11 +9,9 @@ import { config } from './contexts/config';
 
 import "./styles/styles.scss";
 
-const urlShortenerService = new UrlShortenerService();
-
 ReactDOM.render(
     <WidgetMain buttonText={'Url Shortener'}>
-        <UrlShortener service={urlShortenerService}/>
+        <UrlShortener service={new UrlShortenerService(config.hosts.urlShortener)}/>
     </WidgetMain>,
     config.globals.appRoot
 );
