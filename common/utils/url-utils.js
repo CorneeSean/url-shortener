@@ -1,9 +1,13 @@
-const URL_REGEX = /^(((http|https):\/\/(www\.)?)|(www\.)).*\.(?<!www.)[a-zA-z]{2,}$/;
 const PROTOCOL_REGEX = /^(http|https):\/\//;
 
 class UrlUtils {
     static isValidURL( url ) {
-        return URL_REGEX.test( url );
+        try {
+            new URL(url);
+            return true
+        } catch (e) {
+            return false;
+        }
     }
 
     static addProtocol( url ) {
