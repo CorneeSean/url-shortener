@@ -17,18 +17,29 @@ body {
 }
 
 .widget__button {
+  $primary-color: dodgerblue;
+  $secondary-color: white;
+
   color: white;
-  background: dodgerblue;
-  border: 0;
+  background: $primary-color;
+  border: 1px solid $primary-color;
   border-radius: $widget-border-radius;
-  max-width: 120px;
-  padding: 12px;
+  padding: 0 12px;
   font-size: 16px;
   height: 40px;
+  line-height: 40px;
   cursor: pointer;
+
+  &.secondary {
+    $text-color: #333;
+    background: $secondary-color;
+    color: $text-color;
+    border: 1px solid $text-color;
+  }
 
   &[disabled] {
     opacity: 0.9;
+    border-color: silver;
     background: silver;
     cursor: not-allowed;
   }
@@ -36,9 +47,13 @@ body {
   &.stick-left {
     border-radius: 0 $widget-border-radius $widget-border-radius 0;
   }
+
+  &.no-radius {
+    border-radius: 0;
+  }
 }
 
-.fadeIn, {
+.fadeIn {
   opacity: 0;
   animation: .3s ease-in-out fadeIn;
   animation-delay: .2s;
