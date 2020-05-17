@@ -13,7 +13,8 @@ The repo contains:
  1. ~~Widget iFrame bootstrap script~~ 
  1. ~~Demo page~~ 
  1. ~~UrlShortener server~~
- 1. UrlShortener React app
+ 1. ~~UrlShortener React app~~
+ 1. ~~Node js scripts for local development end demo run~~
  
 ### Running the app
 
