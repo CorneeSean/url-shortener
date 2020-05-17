@@ -11,13 +11,11 @@ const globals: AppGlobals = {
 };
 
 export type WidgetConfig = {
-    toggleWidgetMessage: string,
     globals: AppGlobals,
     hosts: {[key: string]: string},
 }
 
 export const config: WidgetConfig = {
-    toggleWidgetMessage: 'url-shortener:toggle',
     globals,
     hosts: {
         urlShortener: "http://localhost:8080",

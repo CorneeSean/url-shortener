@@ -1,5 +1,7 @@
 import * as React from "react";
+import { useContext } from "react";
 
+import { WidgetMessagingContext } from "../../../contexts/widget-messaging";
 import './short-link.scss';
 
 type ShortLinkProps = {
@@ -8,14 +10,20 @@ type ShortLinkProps = {
 };
 
 export const ShortLink: React.FC<ShortLinkProps> = ({shortUrl, onBackClick}) => {
-    const onCopy = () => {};
+    const widgetMessaging = useContext(WidgetMessagingContext);
+    const onCopyClick = () => {
+        widgetMessaging.copy(shortUrl);
+    };
     return (
         <>
             <p>Your short link: </p>
             <div className='url-shortener__short-link'>
-                <a href={shortUrl} target='_blank' rel='norefferer noopener'>{shortUrl}</a>
+                <a href={shortUrl}
+                   target='_blank'
+                   rel='norefferer noopener'>{shortUrl}
+                </a>
                 <button className="widget__button no-radius"
-                        onClick={onCopy}>
+                        onClick={onCopyClick}>
                     Copy
                 </button>
                 <button className="widget__button secondary stick-left"
@@ -24,7 +32,6 @@ export const ShortLink: React.FC<ShortLinkProps> = ({shortUrl, onBackClick}) => 
                     Back
                 </button>
             </div>
-
         </>
     )
 };

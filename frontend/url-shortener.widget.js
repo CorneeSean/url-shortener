@@ -1,10 +1,13 @@
-(function(widgetOrigin) {
+(function ( widgetOrigin ) {
     const WIDGET_ORIGIN = widgetOrigin || 'http://localhost:8080';
     const WIDGET_ID = 'url-shortener-widget';
-    const WIDGET_TOGGLE_MESSAGE = 'url-shortener:toggle';
+    const WIDGET_MESSAGE_HANDLERS = {
+        'url-shortener:toggle': () => document.getElementById( WIDGET_ID ).classList.toggle( WIDGET_TOGGLE_CLASS ),
+        'url-shortener:copy': value => navigator.clipboard.writeText( value ),
+    };
     const WIDGET_TOGGLE_CLASS = 'collapsed';
     const WIDGET_IFRAME_STYLES = `
-            #${WIDGET_ID} {
+            #${ WIDGET_ID } {
                 position: fixed;
                 bottom: 0;
                 right: 0;
@@ -17,18 +20,19 @@
                 transition: height 0.3s ease-out, width 0.3s ease-out;
             }
 
-            #${WIDGET_ID}.${WIDGET_TOGGLE_CLASS} {
+            #${ WIDGET_ID }.${ WIDGET_TOGGLE_CLASS } {
                 height: 50px;
                 width: 150px;
             }
         `;
 
-    function toggleWidget( { origin, data } ) {
+    function handleWidgetMessage( { origin, data } ) {
         if ( origin !== WIDGET_ORIGIN ) {
             return;
         }
-        if ( data === WIDGET_TOGGLE_MESSAGE ) {
-            document.getElementById( WIDGET_ID ).classList.toggle( WIDGET_TOGGLE_CLASS );
+        if ( data && data.message && WIDGET_MESSAGE_HANDLERS[ data.message ] ) {
+            const handler = WIDGET_MESSAGE_HANDLERS[ data.message ];
+            handler( data.payload );
         }
     }
 
@@ -42,11 +46,11 @@
         const frame = document.createElement( 'iframe' );
         frame.id = WIDGET_ID;
         frame.src = WIDGET_ORIGIN;
-        frame.classList.add(WIDGET_TOGGLE_CLASS);
+        frame.classList.add( WIDGET_TOGGLE_CLASS );
         document.body.appendChild( frame );
     }
 
-    window.addEventListener('message', toggleWidget);
-    addStylesToHeader(WIDGET_IFRAME_STYLES);
+    window.addEventListener( 'message', handleWidgetMessage );
+    addStylesToHeader( WIDGET_IFRAME_STYLES );
     appendWidgetFrame();
-})(window.urlShortenerOrigin);
+})( window.urlShortenerOrigin );
