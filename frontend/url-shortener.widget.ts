@@ -1,21 +1,20 @@
-import { WidgetMessage } from "./src/contexts/widget-messaging";
+import { bootstrapWidget, WidgetConfig } from "./widget/widget-bootstrap";
+import env from "../common/env";
 
-declare global {
-    interface Window { urlShortenerOrigin?: string; }
-}
-
-type MessageHandler = (...args: any) => void;
-
-(function (widgetOrigin) {
-    const WIDGET_ORIGIN = widgetOrigin || 'http://localhost:8080';
-    const WIDGET_ID = 'url-shortener-widget';
-    const WIDGET_MESSAGE_HANDLERS: {[key: string]: MessageHandler } = {
-        'url-shortener:toggle': () => document.getElementById(WIDGET_ID)!.classList.toggle(WIDGET_TOGGLE_CLASS),
-        'url-shortener:copy': (value: string) => navigator.clipboard.writeText(value),
-    };
-    const WIDGET_TOGGLE_CLASS = 'collapsed';
-    const WIDGET_IFRAME_STYLES = `
-            #${WIDGET_ID} {
+(function () {
+    const id = 'url-shortener-widget';
+    const toggleClass = 'collapsed';
+    const urlShortenerWidgetConfig: WidgetConfig = {
+        origin: env.frontendHost,
+        id,
+        messageHandlers: {
+            // TODO: Strong-type message keys and bind them to widget id
+            'url-shortener:toggle': () => document.getElementById(id)!.classList.toggle(toggleClass),
+            'url-shortener:copy': (value: string) => navigator.clipboard.writeText(value),
+        },
+        toggleClass,
+        styles: `
+            #${id} {
                 position: fixed;
                 bottom: 0;
                 right: 0;
@@ -28,37 +27,12 @@ type MessageHandler = (...args: any) => void;
                 transition: height 0.3s ease-out, width 0.3s ease-out;
             }
 
-            #${WIDGET_ID}.${WIDGET_TOGGLE_CLASS} {
+            #${id}.${toggleClass} {
                 height: 50px;
                 width: 150px;
             }
-        `;
+        `
+    };
 
-    function handleWidgetMessage({origin, data}: { origin: string, data: WidgetMessage }) {
-        if (origin !== WIDGET_ORIGIN) {
-            return;
-        }
-        if (data && data.message && WIDGET_MESSAGE_HANDLERS[data.message]) {
-            const handler = WIDGET_MESSAGE_HANDLERS[data.message];
-            handler(data.payload);
-        }
-    }
-
-    function addStylesToHeader(styles: string) {
-        const styleElement = document.createElement('style');
-        styleElement.innerHTML = styles;
-        document.head.appendChild(styleElement);
-    }
-
-    function appendWidgetFrame() {
-        const frame = document.createElement('iframe');
-        frame.id = WIDGET_ID;
-        frame.src = WIDGET_ORIGIN;
-        frame.classList.add(WIDGET_TOGGLE_CLASS);
-        document.body.appendChild(frame);
-    }
-
-    window.addEventListener('message', handleWidgetMessage);
-    addStylesToHeader(WIDGET_IFRAME_STYLES);
-    appendWidgetFrame();
-})(window.urlShortenerOrigin);
+    bootstrapWidget(urlShortenerWidgetConfig);
+})();
