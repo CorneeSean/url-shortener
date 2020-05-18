@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "description": "Url Shortener",
   "scripts": {
-    "frontend:react": "parcel frontend/src/index.html -d frontend/dist-dev",
-    "frontend:react:build": "parcel build frontend/src/index.html -d server/public --public-url ./public/",
-    "frontend:widget": "parcel frontend/index.dev.html -p 1337 -d frontend/dist-dev",
-    "frontend:widget:build": "parcel build frontend/url-shortener.widget.ts -d server/public",
-    "frontend:parcel:build": "npm run frontend:widget:build && npm run frontend:react:build",
-    "frontend:dev": "concurrently \"npm run frontend:widget\" \"npm run frontend:react\"",
-    "frontend:build": "node ./frontend/build/clean.js && npm run frontend:parcel:build",
-    "server:app": "node ./server/server.js",
-    "server:demo": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
-    "start": "npm run frontend:build && concurrently \"npm run server:app\" \"npm run server:demo\"",
-    "start:dev": "concurrently \"npm run frontend:dev\" \"npm run server:app\""
+    "build": "concurrently \"npm run frontend:build\" \"npm run server:build\"",
+    "frontend:react:dev": "parcel frontend/src/index.html -d dist-dev/frontend",
+    "frontend:react:build": "parcel build frontend/src/index.html -d dist/public --public-url ./public/ --no-source-maps",
+    "frontend:widget:dev": "parcel frontend/index.dev.html -p 1337 -d dist-dev/frontend --open",
+    "frontend:widget:build": "parcel build frontend/url-shortener.widget.ts -d dist/public --no-source-maps",
+    "frontend:dev": "concurrently \"npm run frontend:widget:dev\" \"npm run frontend:react:dev\"",
+    "prefrontend:build": "rimraf dist/public",
+    "frontend:build": "npm run frontend:widget:build && npm run frontend:react:build",
+    "server:build": "parcel build server/server.js -d dist --target node --no-source-maps",
+    "server:start": "NODE_ENV=production node dist/server.js",
+    "server:dev:build": "parcel build server/server.js -d dist-dev/server --target node",
+    "postserver:dev:build": "node dist-dev/server/server.js",
+    "server:dev": "NODE_ENV=development nodemon --watch server --exec \"npm run server:dev:build\"",
+    "demo-server": "cd ./demo && http-server -p 9000 -o http://localhost:9000/index.html",
+    "prestart:demo": "npm run build",
+    "start:demo": "concurrently \"npm run server:start\" \"npm run demo-server\"",
+    "prestart:dev": "rimraf dist-dev",
+    "start:dev": "concurrently \"npm run frontend:dev\" \"npm run server:dev\""
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -26,8 +33,13 @@
     "@types/react-dom": "^16.9.8",
     "concurrently": "^5.1.0",
     "http-server": "^0.11.1",
+    "nodemon": "^2.0.4",
     "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2",
     "sass": "^1.26.5",
     "typescript": "^3.9.2"
+  },
+  "optionalDependencies": {
+    "win-node-env": "^0.4.0"
   }
 }

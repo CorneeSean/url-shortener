@@ -2,7 +2,5 @@ node_modules
 .cache
 .idea
 
-frontend/dist-dev/*
-
-server/public
-server/storage
+dist-dev
+dist

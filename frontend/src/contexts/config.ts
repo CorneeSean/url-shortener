@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import env from "../../../common/env";
 
 type AppGlobals = {
     parentWindow: Window,
@@ -18,7 +19,7 @@ export type WidgetConfig = {
 export const config: WidgetConfig = {
     globals,
     hosts: {
-        urlShortener: "http://localhost:8080",
+        urlShortener: env.serverHost,
     }
 };
 

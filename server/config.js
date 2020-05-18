@@ -1,15 +1,13 @@
 const path = require( 'path' );
-
-const port = 8080;
-const parcelDevServerOrigin = 'http://localhost:1234';
+const env = require( "../common/env.js" );
 
 const corsOptions = {
-    origin: parcelDevServerOrigin
+    origin: env.frontendHost,
 };
 
 module.exports = {
-    port,
-    host: `http://localhost:${ port }`,
+    port: env.serverPort,
+    host: env.serverHost,
     corsOptions,
     storagePath: path.resolve( __dirname + '/storage/storage.txt' ),
     publicPath: path.resolve( __dirname + '/public' ),
