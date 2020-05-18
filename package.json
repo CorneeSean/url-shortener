@@ -4,6 +4,7 @@
   "description": "Url Shortener",
   "scripts": {
     "build": "concurrently \"npm run frontend:build\" \"npm run server:build\"",
+    "clean:storage": "rimraf storage",
     "frontend:react:dev": "parcel frontend/src/index.html -d dist-dev/frontend",
     "frontend:react:build": "parcel build frontend/src/index.html -d dist/public --public-url ./public/ --no-source-maps",
     "frontend:widget:dev": "parcel frontend/index.dev.html -p 1337 -d dist-dev/frontend --open",

@@ -2,7 +2,7 @@ import { WriteStream, default as fs } from "fs";
 import nodePath from 'path';
 
 const CSV_SEPARATOR = ',';
-const KV_SEPARATOR = ':';
+const KV_SEPARATOR = ':::';
 
 type Cache = { [key: string]: string };
 
