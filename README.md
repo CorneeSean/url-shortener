@@ -4,9 +4,10 @@
 This repository contains the code for UrlShortener showcase app.
 
 The repo contains:
- * a client widget in `/frontend` directory, to be written in React - currently only widget bootstrapping available
- * a server in `/server` directory, written in Node.js (Express)
- * demo website connecting the two parts above, located in `/demo` directory
+ * a client widget in `/frontend` directory written in TypeScript and React
+ * a server in `/server` directory, written in Node.js (Express) and TypeScript
+ * simple demo website, located in `/demo` directory
+ * npm build and run scripts in `"scripts"` section of `package.json` file
  
  Checklist - features to complete:
  1. ~~Documentation~~
@@ -14,19 +15,29 @@ The repo contains:
  1. ~~Demo page~~ 
  1. ~~UrlShortener server~~
  1. ~~UrlShortener React app~~
- 1. ~~Node js scripts for local development end demo run~~
+ 1. ~~Setting up npm scripts with Parcel and Nodemon for developement and "production" environments~~
+ 1. ~~Migrate server to Typecript~~
  
-### Running the app
+### Running the demo app
 
-To run the app:
+Demo app is a simulation of production set-up for widgets embedded on third party websites.
+
+To run the demo app:
 
 1. Clone the repo.
 1. Make sure you have `Node.js` installed on your machine.
 1. Open terminal (command prompt) window.
-1. Step into main repo directory, run `npm install` and later `npm run start`
-1. The browser window should open at `localhost:9000` (demo server) and UrlShortener server should start at localhost:8080
+1. Step into main repo directory, run `npm install` and later `npm run start:demo`
+1. The browser window should open at `localhost:9000` (demo server) and UrlShortener server should start at `localhost:8080`
 
-NOTE: Tested to work with `node` version `12.14.1`
+NOTE: Tested to work with `node` version `12.14.1` on `Windows 10`. Not tested on Linux (yet)
+
+### Running the development server
+
+For further app development, run `npm run start:dev`.
+
+Development server supports simultaneous live-reload both for frontend (widget bootstrap + React App) and backend development (Node.js server)
+This allows for faster iteration and easier debugging, adding unminified code and source maps support.
 
 ### Widget bootstrap process on client side
 
