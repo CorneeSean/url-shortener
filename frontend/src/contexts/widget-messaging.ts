@@ -1,12 +1,9 @@
 import { createContext } from "react";
+import { WidgetMessage } from "../../widget/widget-bootstrap";
 import { config } from "./config";
 
 type WidgetMessagesFactory = { [key: string]: MessageCreator };
 
-export type WidgetMessage = {
-    message: string,
-    payload: any,
-}
 type MessageCreator = (...args: any) => WidgetMessage;
 
 const widgetMessagesFactory: WidgetMessagesFactory = {

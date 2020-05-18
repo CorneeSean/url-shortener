@@ -11,12 +11,12 @@ const globals: AppGlobals = {
     appRoot: document.getElementById('app-root')!,
 };
 
-export type WidgetConfig = {
+type ReactWidgetConfig = {
     globals: AppGlobals,
     hosts: {[key: string]: string},
 }
 
-export const config: WidgetConfig = {
+export const config: ReactWidgetConfig = {
     globals,
     hosts: {
         urlShortener: env.serverHost,
