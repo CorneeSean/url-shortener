@@ -19,7 +19,7 @@ export const config: ServerConfig = {
     port: env.serverPort,
     host: env.serverHost,
     corsOptions,
-    storagePath: path.resolve(__dirname + '/storage/storage.txt'),
+    storagePath: path.resolve('storage', env.isDev ? 'storage.dev.txt' : 'storage.txt'),
     publicPath: path.resolve(__dirname + '/public'),
     indexPath: path.resolve(__dirname + '/public/index.html'),
 };
